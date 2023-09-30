@@ -1,17 +1,18 @@
 # 
 FROM python:3.8.14-slim-buster
 
-ENV POETRY_VERSION=1.6
 # 
 WORKDIR /code
 
 # 
 COPY ./ /code/
 
-# 
-RUN pip install "poetry==${POETRY_VERSION}"
+# install curl
+RUN apt-get update && apt-get install -y curl
 
-# install dependencies
-RUN poetry install --no-interaction --no-ansi
 # 
-CMD ["poetry", "run", "start"]
+RUN curl -sSL https://install.python-poetry.org | python3 - && \
+  export PATH="/root/.local/bin:$PATH" && \
+  poetry install --no-interaction --no-ansi
+# 
+CMD ["/root/.local/bin/poetry", "run", "start"]
