@@ -27,7 +27,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build Docker image
-      run: docker build --platform linux/arm64 -t gat786/k8s-fastapi-sample:latest .
+      run: docker build -t gat786/k8s-fastapi-sample:latest .
 
     - name: Push Docker image to Docker Hub
       run: docker push gat786/k8s-fastapi-sample:latest
