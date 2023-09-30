@@ -7,14 +7,14 @@ import json
 api     = FastAPI() 
 logger  = logging.getLogger()
 
-# @api.get("/")
-# def root():
-#   message = {"message": "Hello World!"}
-#   logger.info(message)
-#   return Response(
-#     content=json.dumps(message), 
-#     media_type="application/json"
-#   )
+@api.get("/")
+def root():
+  message = {"message": "Hello World!"}
+  logger.info(message)
+  return Response(
+    content=json.dumps(message), 
+    media_type="application/json"
+  )
 
 @api.get("/heartbeat")
 def heartbeat():
