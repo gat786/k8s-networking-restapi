@@ -4,30 +4,31 @@ import uvicorn
 import logging
 import json
 
-api     = FastAPI() 
-logger  = logging.getLogger()
+api = FastAPI()
+logger = logging.getLogger()
+
 
 @api.get("/")
 def root():
-  message = {"message": "Hello World!"}
-  logger.info(message)
-  return Response(
-    content=json.dumps(message), 
-    media_type="application/json"
-  )
+    message = {"message": "Hello World!"}
+    logger.info(message)
+    return Response(content=json.dumps(message), media_type="application/json")
+
 
 @api.get("/heartbeat")
 def heartbeat():
-  return "Ok"
+    return "Ok"
+
+
+@api.get("/welcome")
+def welcome():
+    return json.dumps({"message": "Welcome to the API"})
+
 
 def app():
-  logger.info("Starting API")
-  uvicorn.run(
-    app="sample.main:api", 
-    host="0.0.0.0", 
-    port=8000,
-    reload=True
-  )
+    logger.info("Starting API")
+    uvicorn.run(app="sample.main:api", host="0.0.0.0", port=8000, reload=True)
+
 
 if __name__ == "__main__":
-  app()
+    app()
